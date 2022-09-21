@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\jralv\Documents\Repositorios\Grupo-8---2132\tutorial-env"
+VIRTUAL_ENV="C:\Users\asarm\OneDrive\Escritorio\Repositorio Ciclo3\Grupo-8---2132\tutorial-env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
