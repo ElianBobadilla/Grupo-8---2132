@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Inicio de Sesión
+{% endblock %}
+
 {% block content %}
 <div class="global-container">
   <div class="login-container col-lg-5 bg-dark d-flex  justify-content-evenly">
       <div class="align-self-center w-100 px-lg-5 py-lg-4 p-4">
-          <h1 class="font-weight-bold mb-4"> Bienvenido a INDITEX</h1>
+          <h1 class="font-weight-bold mb-4"> Bienvenido a LBPH Mensajes</h1>
           <form>
               <div class="mb-4">
                   <label for="exampleInputEmail1" class="form-label font-weight-bold">Usuario</label>
@@ -14,7 +18,7 @@
                   <label for="exampleInputPassword1" class="form-label font-weight-bold">Contraseña</label>
                   <input type="password" class="form-control bg-light text-dark border-0 mb-2" placeholder="Ingresa tu contraseña" id="exampleInputPassword1">
               </div>
-              <a href="#" id="emailHelp" class="textfor">¿Has olvidado tu contraseña?</a>
+              <a href="http://127.0.0.1:5000/contra" id="emailHelp" class="textfor">¿Has olvidado tu contraseña?</a>
             <div>
               <button type="button" class="btn btn-outline-secondary text-dark font-weight-bold rounded-3">Iniciar sesión</button>
             </div>

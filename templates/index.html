@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 
+{% block title %}
+LBPH Mensajeria
+{% endblock %}
+
 {% block content %}
 
 <header class="header bg-dark">
     <nav>
        <ul class="nav-links">
-            <li><a href="#">INICIO</a></li>
-            <li><a href="#">PRODUCTOS</a></li>
-            <li><a href="#">SOBRE NOSOTROS</a></li>
+            <li><a href="#">Bandeja Entrada</a></li>
+            <li><a href="#">Escribir Nuevo Mensaje</a></li>
        </ul>            
     </nav>
     <a class="button-ingresar" href="http://127.0.0.1:5000/login">
@@ -18,32 +21,9 @@
                 </svg>
         </button></a>
 </header>
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="5000">
-        <img src="https://static.e-stradivarius.net/5/cms/assets/uploads/2400Newin_67.jpg?impolicy=stradivarius-itxmediumhigh&ts=20220922022541" 
-            class="d-block w-100" alt="..." width="90" height="600">
-        <div class="carousel-caption d-none d-md-block">
-          <h1>BERSHK</h1>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="5000">
-        <img src="https://static.e-stradivarius.net/5/cms/assets/uploads/2400Accesorios_44.jpg?impolicy=stradivarius-itxmediumhigh&ts=20220922022541" 
-            class="d-block w-100" alt="..."width="90" height="600">
-        <div class="carousel-caption d-none d-md-block">
-          <h1>STRADIVARIUS</h1>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="5000">
-        <img src="https://static.e-stradivarius.net/5/cms/assets/uploads/2400Pantalones_18.jpg?impolicy=stradivarius-itxmediumhigh&ts=20220922022541"
-             class="d-block w-100" alt="..."width="90" height="600">
-        <div class="carousel-caption d-none d-md-block">
-          <h1>MASSIMO DUTTI</h1>   
-        </div>
-      </div>
-    </div>
-  </div>
+<h1> TEXTO DE EJEMPLO</h1>
+
 
 
 {% endblock %}
