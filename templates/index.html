@@ -1,26 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/estilos.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Inditex Online</title>
-</head>
-<body  class="bg-gradient-primary">
+{% extends 'base.html' %}
 
-        {% block content %}
+{% block content %}
 
-        {% endblock %}
+<header class="header bg-dark">
+    <nav>
+       <ul class="nav-links">
+            <li><a href="#">INICIO</a></li>
+            <li><a href="#">PRODUCTOS</a></li>
+            <li><a href="#">SOBRE NOSOTROS</a></li>
+       </ul>            
+    </nav>
+    <a class="button-ingresar" href="http://127.0.0.1:5000/login">
+        <button>INGRESAR 
+            <svg width="35" height="34" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16 2H30C31.6569 2 33 3.34315 33 5V29C33 30.6569 31.6569 32 30 32H16C14.3431 32 13 30.6569 13 29V24H12H11V29C11 31.7614 13.2386 34 16 34H30C32.7614 34 35 31.7614 35 29V5C35 2.23858 32.7614 0 30 0H16C13.2386 0 11 2.23858 11 5V10H12H13V5C13 3.34315 14.3431 2 16 2Z" fill="whitesmoke"/>
+                <path d="M25.7071 17.7071C26.0976 17.3166 26.0976 16.6834 25.7071 16.2929L19.3431 9.92893C18.9526 9.53841 18.3195 9.53841 17.9289 9.92893C17.5384 10.3195 17.5384 10.9526 17.9289 11.3431L23.5858 17L17.9289 22.6569C17.5384 23.0474 17.5384 23.6805 17.9289 24.0711C18.3195 24.4616 18.9526 24.4616 19.3431 24.0711L25.7071 17.7071ZM-3.45071e-10 18L25 18L25 16L3.45071e-10 16L-3.45071e-10 18Z" fill="whitesmoke"/>
+                </svg>
+        </button></a>
+</header>
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 
-    
-    
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="5000">
+        <img src="https://static.e-stradivarius.net/5/cms/assets/uploads/2400Newin_67.jpg?impolicy=stradivarius-itxmediumhigh&ts=20220922022541" 
+            class="d-block w-100" alt="..." width="90" height="600">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>BERSHK</h1>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="https://static.e-stradivarius.net/5/cms/assets/uploads/2400Accesorios_44.jpg?impolicy=stradivarius-itxmediumhigh&ts=20220922022541" 
+            class="d-block w-100" alt="..."width="90" height="600">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>STRADIVARIUS</h1>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="https://static.e-stradivarius.net/5/cms/assets/uploads/2400Pantalones_18.jpg?impolicy=stradivarius-itxmediumhigh&ts=20220922022541"
+             class="d-block w-100" alt="..."width="90" height="600">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>MASSIMO DUTTI</h1>   
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="/static/js/main.js"></script>
-</body>
-</html>
+{% endblock %}

@@ -1,69 +1,54 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div class="card o-hidden border-0 shadow-lg my-5">
-    <div class="card-body p-0">
-      <!-- Nested Row within Card Body -->
-      <div class="row">
-        <div class="col-lg-5 d-none d-lg-block">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png" class="img-fluid" alt="Responsive image" ></div>
-        <div class="col-lg-7">
-          <div class="p-5">
-            <div class="text-center">
-              <h1 class="h4 text-gray-900 mb-4">Registro de Usuario</h1>
-            </div>
-            <form class="user" action="/usuarios" method="POST">
-              <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  <input type="text" class="form-control form-control-user mb-3" id="nombre1" name="nombre1" placeholder="Nombres">
-                </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control form-control-user mb-3" id="nombre2" name="nombre2" placeholder="Apellidos">
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <input type="email" class="form-control form-control-user mb-3" id="usuario" name="usuario" placeholder="Email">
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  <input type="password" class="form-control form-control-user mb-3" id="pass" name="pass" placeholder="Contraseña">
-                </div>
-                <div class="col-sm-6">
-                  <input type="password" class="form-control form-control-user mb-3" id="exampleRepeatPassword" placeholder="Repetir Contraseña">
-                </div>
-              </div>
 
-              <div class="form-group mb-3">
-                <div class="custom-control custom-checkbox small">
-                  <input type="checkbox" class="custom-control-input" id="customCheck">
-                  <label class="custom-control-label" for="customCheck"><a href="{{url_for('politicas')}}">Acepto las Politicas de Privacidad y Manejo de datos</a></label>
-                </div>
+<div class="global-container">
+  <div class="registro-container col-lg-5 bg-dark d-flex  justify-content-evenly">
+      <div class="align-self-center w-100 px-lg-5 py-lg-4 p-4">
+          <h1 class="font-weight-bold mb-4"> Registro</h1>
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="inputName1" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="inputName1">
               </div>
-              
-              
-
-              <button class="btn btn-primary btn-user btn-block" type="submit">Registrarme</button>
-            <!--  <hr>
-              <a href="index.html" class="btn btn-google btn-user btn-block">
-                <i class="fab fa-google fa-fw"></i> Register with Google
-              </a>
-              <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-              </a>
-            </form>
-            <hr> -->
+              <div class="col-md-6">
+                <label for="inputName2" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="inputName2">
+              </div>
+              <div class="col-md-6">
+                <label for="inputEmail" class="form-label">Correo</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="example@inditex.com">
+              </div>
+              <div class="col-md-6">
+                <label for="inputEmail2" class="form-label">Confirmar Correo</label>
+                <input type="email" class="form-control" id="inputEmail2" placeholder="example@inditex.com">
+              </div>
+              <div class="col-md-6">
+                <label for="inputTel" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="inputTel">
+              </div>
+              <div class="col-md-6">
+                <label for="inputAddress" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Apartment, studio, or floor">
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword1" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="inputPassword1">
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword2" class="form-label">Confirmar contraseña</label>
+                <input type="password" class="form-control" id="inputPassword2">
+              </div>
+              <div class="col-12">
+                  <label>
+                    Al hacer clic en "Crear cuenta", estas aceptando nuestras <a href="#" class="text-light font-weight-bold text-decoration-none">Politicas de privacidad</a>
+                  </label>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Crear cuenta</button>
+              </div>
           </form>
-            <hr>
-          
-            <div class="text-center">
-              <a class="small" href="{{url_for('login')}}">Ingresar al Sistema</a>
-            </div>
-            <hr>
-          </div>
-        </div>
       </div>
-    </div>
   </div>
-
+</div>
 {% endblock %}

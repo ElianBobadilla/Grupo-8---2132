@@ -1,0 +1,13 @@
+body {
+    height: 100%;
+    background-color: rgb(221, 221, 221) !important;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.global-container{
+    position: relative;
+    height: 100vh;
+}
+
+
+

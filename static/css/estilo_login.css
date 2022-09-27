@@ -1,0 +1,32 @@
+.login-container{
+    height: 80vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    color: blanchedalmond;
+}
+
+form {
+    padding-top: 20px;
+    font-size: 16px;
+    margin-top: 30 px;  
+}
+
+.btn{
+    background-color: cyan;
+    border-color: cyan;
+    font-size: 16 px;
+    transform: translateY(10px);
+}
+.textfor{
+    font-size:  16 px;
+    color: cyan;
+}
+.Crear-cuenta{
+    text-align: center;
+    padding-top: 25 px;
+    font-size: 16px;
+    transform: translateY(40px);
+}
