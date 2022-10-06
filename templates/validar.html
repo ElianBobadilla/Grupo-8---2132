@@ -1,21 +1,25 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Recuperar Contraseña
+Validar Cuenta
 {% endblock %}
 
 {% block content %}
 <div class="global-container">
-    <div class="contra-container col-lg-5 bg-dark d-flex  justify-content-evenly">
+    <div class="activar-container col-lg-5 bg-dark d-flex  justify-content-evenly">
         <div class="align-self-center w-100 px-lg-5 py-lg-4 p-4">
-            <h1 class="font-weight-bold mb-4">Olvidé mi contraseña</h1>
-            <form action="/recuperarcontra" method="POST">
+            <h1 class="font-weight-bold mb-4">Activación de cuenta</h1>
+            <form action="/activarCuenta" method="POST">
                 <div class="mb-4">
-                    <label for="exampleInputEmail1" class="form-label font-weight-bold">Ingrese su correo</label>
-                    <input type="email" class="form-control" name="Email" placeholder="example@inditex.com" >
+                    <label for="exampleInputEmail1" class="form-label font-weight-bold">Ingrese su usuario</label>
+                    <input type="text" class="form-control bg-light text-dark border-0" name="Usuario" placeholder="example">
+                </div>
+                <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label font-weight-bold">Ingrese Codigo de Activacion</label>
+                    <input type="text" class="form-control bg-light text-dark border-0" name="Codigo" placeholder="2022------">
                 </div>
                 <div>
-                  <button type="submit" class="btn btn-outline-secondary text-dark font-weight-bold rounded-3">Recuperar</button>
+                    <button type="submit" class="btn btn-outline-secondary text-dark font-weight-bold rounded-3">Activar</button>
                 </div>
             </form>
             {% with messages = get_flashed_messages() %}
@@ -34,5 +38,5 @@ Recuperar Contraseña
             {% endwith %} 
         </div>
     </div>
-  </div>
+</div>
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Nueva Contraseña
+{% endblock %}
+
+--pedir en la vista de nueva contra su usuario!!!!
+
+
+{% block content %}
+<div class="global-container">
+    <div class="recupera-container col-lg-5 bg-dark d-flex  justify-content-evenly">
+        <div class="align-self-center w-100 px-lg-5 py-lg-4 p-4">
+            <h1 class="font-weight-bold mb-4">Nueva Contraseña(Corregir)</h1>
+            <form>
+                <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label font-weight-bold">Ingrese su nueva contraseña</label>
+                    <input type="password" class="form-control bg-light text-dark border-0" id="exampleInputPsw1" placeholder="***********">
+                </div>
+                <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label font-weight-bold">Confirmar su nueva contraseña</label>
+                    <input type="password" class="form-control bg-light text-dark border-0" id="exampleInputPsw2" placeholder="***********">
+                </div>
+                
+                <div>
+                    <button type="submit" class="btn btn-outline-secondary text-dark font-weight-bold rounded-3">Recuperar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
