@@ -11,35 +11,6 @@ app.secret_key='Mi clave Secreta'+str(datetime.now)
 def prueba():
     return True
 
-@app.route('/consultamensajes')
-def consulta_mensajes():
-    Usuario='alexillo@gmail.com'
-    resultado=controlador.listar_mensajes(Usuario)
-    return jsonify(resultado)
-
-@app.route('/consultamensajesind',methods=['POST'])
-def consulta_mensajes_ind():
-    datos=request.get_json()
-    Usuario=datos['Usuario']
-    resultado=controlador.listar_mensajes(Usuario)
-    return jsonify(resultado)
-
-@app.route('/enviarmensaje', methods=['POST'])
-def enviar_mensaje():
-    datos=request.form
-    rem=session['Usuario']
-    dest=datos['Destinatario']
-    asu=datos['Asunto']
-    mens=datos['Cuerpo']
-    resultado=controlador.adicionar_mensajes(rem,dest,asu,mens)
-    if resultado:
-        flash('Mensaje Enviar Exitosamente...')
-    else:
-        flash('Error Enviando Mensaje...')
-
-    listaruser=controlador.listar_usuario(rem)
-    return render_template('bandeja.html', datauser=listaruser)
-
 @app.route('/activarCuenta', methods=['POST']) #Check 
 def activarCuenta():
     datos=request.form
