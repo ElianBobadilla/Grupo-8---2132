@@ -11,6 +11,51 @@ app.secret_key='Mi clave Secreta'+str(datetime.now)
 def prueba():
     return True
 
+@app.route('/consultarmail',methods=['GET','POST'])
+def consulta_mail():
+    if request.method=='POST':
+        datos=request.get_json()
+        usu=datos['username']
+        tipo=datos['tipo']
+        if tipo==1:
+            resultado=controlador.listar_mensajes(1,'')
+        else:
+            resultado=controlador.listar_mensajes(2,usu)    
+  
+    else:
+       resultado=controlador.listar_mensajes(1,'')      
+
+    return jsonify(resultado)
+
+@app.route('/consultamensajes')
+def consulta_mensajes():
+    usu='alvinlubo10@gmail.com'
+    resultado=controlador.listar_mensajes(usu)
+    return jsonify(resultado)
+
+@app.route('/consultamensajesind',methods=['POST'])
+def consulta_mensajes_ind():
+    datos=request.get_json()
+    usu=datos['username']
+    resultado=controlador.listar_mensajes(usu)
+    return jsonify(resultado)
+
+@app.route('/enviarmensaje', methods=['POST'])
+def enviar_mensaje():
+    datos=request.form
+    rem=session['username']
+    dest=datos['destinatario']
+    asu=datos['asunto']
+    mens=datos['cuerpo']
+    resultado=controlador.adicionar_mensajes(rem,dest,asu,mens)
+    if resultado:
+        flash('Mensaje Enviar Exitosamente...')
+    else:
+        flash('Error Enviando Mensaje...')
+
+    listaruser=controlador.listar_usuario(rem)
+    return render_template('bandeja.html', datauser=listaruser) 
+
 @app.route('/activarCuenta', methods=['POST']) #Check 
 def activarCuenta():
     datos=request.form

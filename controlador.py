@@ -86,5 +86,69 @@ def validarcorreo(Email):
             return 'NO'
     except:
         return False
+
+def listar_usuario(Usuario):
+    try:
+        db=conexion()
+        cursor=db.cursor()
+        sql='SELECT * FROM Usuario WHERE Usuario<>?'
+        cursor.execute(sql,[Usuario])
+        resultado=cursor.fetchall()
+        usuarios=[]
+        for u in resultado:
+            registro={
+                    'ID':u[0],
+                    'Usuario':u[1],
+                    'Contraseña':u[2],
+                    'Email':u[3]
+                }
+            usuarios.append(registro)        
+                    
+        return usuarios
+    except:
+        return False   
+
+
+def adicionar_mensajes(rem,dest,asunto,cuerpo):
+    try:
+        db=conexion()
+        cursor=db.cursor()
+        sql='INSERT INTO Correos(Remitente,Destinatario,Asunto,Mensaje) VALUES(?,?,?,?)'
+        cursor.execute(sql,[rem,dest,asunto,cuerpo])
+        db.commit()
+        return True
+    except:
+        return False
+
+def listar_mensajes(tipo,Usuario):
+    try:
+        db=conexion()
+        cursor=db.cursor()
+        if tipo==1:
+            sql='SELECT * FROM Correos ORDER BY Fecha DESC'
+            cursor.execute(sql)
+        else:  
+            sql='SELECT * FROM Correos WHERE Remitente=? OR Destinatario=? ORDER BY Fecha DESC'
+            cursor.execute(sql,[Usuario,Usuario])
+        resultado=cursor.fetchall()
+        usuarios=[]
+        for u in resultado:
+            mensaje='Mensaje Recibido'
+            if u[1]==Usuario:
+                mensaje='Mensaje Enviado'
+            registro={
+                    'Id':u[0],
+                    'Remitente':u[1],
+                    'Destinatario':u[2],
+                    'Asunto':u[3],
+                    'Mensaje':u[4],
+                    'Fecha':u[5],
+                    'tipo':mensaje
+                }
+            usuarios.append(registro)        
+                    
+        return usuarios
+    except:
+        return False
     
     
