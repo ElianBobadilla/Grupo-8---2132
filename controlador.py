@@ -7,7 +7,6 @@ import EnviarCorreo
 from flask import flash
 import random
 
-
 DB_NAME='Ejemplo_DB.db'
 
 def conexion():
@@ -27,7 +26,7 @@ def adicionar_registros(Usuario, Contraseña, Email):
         sql = 'INSERT INTO Usuario (Usuario, Contraseña, Email, Verificado, Cod_Verificacion) VALUES (?,?,?,?,?)'
         cursor.execute(sql,[Usuario, Contraseña, Email, 0, Cod_verificacion])
         db.commit()
-        EnviarCorreo.Correo(Email, Cod_verificacion)
+        EnviarCorreo.Correo(Usuario, Email, Cod_verificacion)
         return True
     except:
         return False
@@ -67,8 +66,7 @@ def activar_cuenta(Usuario, Cod_Verificacion):
         print(Usuario, Cod_Verificacion)
         return True
     except:
-        return False
-    
+        return False    
     
 def validarcorreo(Email):
     print(Email)
@@ -78,12 +76,23 @@ def validarcorreo(Email):
         Sql = 'SELECT * FROM Usuario WHERE Email=?'
         cursor.execute(Sql,[Email])
         resultado = cursor.fetchone()
-        EnviarCorreo.RecuperarContraseña()
+        EnviarCorreo.RecuperarContraseña(Email)
         print(resultado)
         if resultado != None:
             return 'SI'
         else: 
             return 'NO'
+    except:
+        return False   
+    
+def actualizar_contra(Usuario,Contraseña):
+    try:   
+        db=conexion()
+        cursor=db.cursor()
+        Sql = "UPDATE Usuario SET Contraseña=? WHERE Usuario=?"
+        cursor.execute(Sql,[Contraseña, Usuario])
+        db.commit()
+        return True
     except:
         return False
 
@@ -107,7 +116,6 @@ def listar_usuario(Usuario):
         return usuarios
     except:
         return False   
-
 
 def adicionar_mensajes(rem,dest,asunto,cuerpo):
     try:
@@ -150,5 +158,3 @@ def listar_mensajes(tipo,Usuario):
         return usuarios
     except:
         return False
-    
-    

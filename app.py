@@ -29,7 +29,7 @@ def consulta_mail():
 
 @app.route('/consultamensajes')
 def consulta_mensajes():
-    usu='alvinlubo10@gmail.com'
+    usu='equipo_g8@outlook.com'
     resultado=controlador.listar_mensajes(usu)
     return jsonify(resultado)
 
@@ -54,9 +54,9 @@ def enviar_mensaje():
         flash('Error Enviando Mensaje...')
 
     listaruser=controlador.listar_usuario(rem)
-    return render_template('bandeja.html', datauser=listaruser) 
+    return render_template('bandeja.html', datauser=listaruser)
 
-@app.route('/activarCuenta', methods=['POST']) #Check 
+@app.route('/activarCuenta', methods=['POST'])
 def activarCuenta():
     datos=request.form
     Usuario=datos['Usuario']
@@ -72,9 +72,8 @@ def activarCuenta():
         else:
             flash('Error en la activación de la activación')
             return redirect('/validar')
-              
-                       
-@app.route('/verificar', methods=['POST']) #Check
+                                
+@app.route('/verificar', methods=['POST'])
 def validarlogin():
     datos=request.form
     Usu=datos['Usuario']
@@ -101,8 +100,7 @@ def validarlogin():
                 flash('Contraseña Incorrecta')
                 return redirect(url_for('login'))
             
-
-@app.route('/addregistro', methods=['POST']) #Check 
+@app.route('/addregistro', methods=['POST'])
 def add_registro():
     datos=request.form
     Usuario=datos['Usuario']
@@ -110,43 +108,58 @@ def add_registro():
     Email=datos['Email']
     ContraseñaEnc=generate_password_hash(Contraseña)
     if Usuario==''and Contraseña=='' and Email=='':
-       flash('Datos Incompletos')
-       print('Datos Incompletos')
-       return redirect(url_for('registro'))
+        flash('Datos Incompletos')
     elif len(Contraseña)<=6:    
-       flash('La contraseña debe tener minimo 6 caracteres')
-       return redirect(url_for('registro'))
+        flash('La contraseña debe tener minimo 6 caracteres')
     else:
-       resultado=controlador.adicionar_registros(Usuario,ContraseñaEnc,Email)
-       if resultado:
-        flash('Registro Almacenado Correctamente')
-        return redirect(url_for('login'))
-       else:
-        flash('Ha oc')
-        return redirect(url_for('registro'))
-    
+        resultado=controlador.adicionar_registros(Usuario,ContraseñaEnc,Email)
+        if resultado:
+            flash('Registro Almacenado Correctamente')
+            return redirect(url_for('login'))
+        else:
+            flash('Ha ocurrido un error')
+    return redirect(url_for('registro'))   
     
 @app.route('/recuperarcontra', methods=['POST'])
 def recuperarcontra():
     datos=request.form
     Email=datos['Email']
     if  Email=='':
-        flash('Ingrese un correo') 
-        return redirect(url_for('recuperar'))    
+        flash('Ingrese un correo')     
     else:
         resultado = controlador.validarcorreo(Email)
-        if resultado == 'NO':
-            flash('No hay una cuenta asociada a este correo')
-            return redirect(url_for('recuperar')) 
-        elif resultado == 'SI':
-            flash('Revise la bandeja de entrada de su correo')
-            return redirect(url_for('login')) 
+        if resultado=='SI':
+            flash('Usuario Encontrado: Mensaje enviado al correo')
+        elif resultado=='NO':
+            flash('Usuario NO Existe en la base de datos')    
         else:
-            flash('Invalid')
-            return redirect(url_for('recuperar'))
+            flash('No se Puede ejecutar la consulta, intente mas tarde')
+    return redirect(url_for('restablecer'))   
 
-# ---- Rutas de Navegación ----   
+@app.route('/actualizarcontra', methods=['POST'])
+def actualizarcontra():
+    datos=request.form
+    Usuario=datos['Usuario']
+    Contraseña1=datos['Contraseña1']
+    Contraseña2=datos['Contraseña2']
+    if Usuario=="" or Contraseña1=="" or Contraseña2=="":
+        flash('Datos Incompletos')
+    elif len(Contraseña1)<=6:    
+        flash('La contraseña debe tener minimo 6 caracteres')
+    elif Contraseña1 != Contraseña2:
+        flash('Las contraseñas no son iguales')
+        redirect(url_for('/nueva-contra'))
+    else:
+        ContraseñaEnc=generate_password_hash(Contraseña1)
+        resultado=controlador.actualizar_contra(Usuario,ContraseñaEnc)
+        if resultado:
+            flash('Actualización realizada correctamente')
+            return redirect(url_for('login'))
+        else:
+            flash('Ha ocurrido un error')
+    return redirect(url_for('login'))
 
+### RUTAS DE NAVEGACIÓN ###   
 @app.route('/bandeja')
 def bandeja():
     return render_template('bandeja.html')
@@ -163,9 +176,9 @@ def registro():
 def nueva_contra():
     return render_template('nueva-contra.html')
 
-@app.route('/recuperar')
-def recuperar():
-    return render_template('recuperar.html')
+@app.route('/restablecer')
+def restablecer():
+    return render_template('restablecer.html')
 
 @app.route('/validar')
 def validar():

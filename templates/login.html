@@ -22,14 +22,14 @@ Inicio de Sesión
         <div class="align-self-center w-100 px-lg-5 py-lg-4 p-4">
             <form action="/verificar" method="POST">
                 <div class="mb-4">
-                    <label for="exampleInputEmail1" class="form-label font-weight-bold">Usuario</label>
-                    <input type="text" class="form-control" id="inputName1" name="Usuario" placeholder="example">
+                    <label class="form-label font-weight-bold">Usuario</label>
+                    <input type="text" class="form-control" name="Usuario" placeholder="example">
                 </div>
                 <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label font-weight-bold">Contraseña</label>
-                    <input type="password" class="form-control" id="inputPassword1" name="Contraseña" placeholder="********">
+                    <label class="form-label font-weight-bold">Contraseña</label>
+                    <input type="password" class="form-control" name="Contraseña" placeholder="********">
                 </div>
-                <a href={{url_for('recuperar')}}  class="textfor">¿Has olvidado tu contraseña?</a>
+                <a href={{url_for('restablecer')}}  class="textfor">¿Has olvidado tu contraseña?</a>
                 <div>
                     <button type="submit" class="btn btn-outline-secondary text-dark font-weight-bold rounded-3">Iniciar Sesión</button>
                 </div>
