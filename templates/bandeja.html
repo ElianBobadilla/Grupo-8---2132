@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'menu.html' %}
 
 {% block content %}
 
@@ -30,7 +30,7 @@
                                         <select class="form-select mb-3" aria-label="Default select example" id="destinatario" name="destinatario">
                                             <option value="seleccione" selected>Seleccione</option>
                                          {% for user in datauser %}
-                                            <option value="{{user['usuario']}}">{{ user['nombre'].upper() }} {{ user['apellido'].upper() }}</option>
+                                            <option value="{{user['Email']}}">{{ user['Usuario'].upper() }}</option>
                                          {% endfor %}
                                          
                                         </select>
@@ -95,10 +95,12 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Codigo</th>
-                                    <th>Apellido</th>
-                                    <th>Perfil</th>
-                                    <th>Acciones</th>
+                                    <th>Remitente</th>
+                                    <th>Destinatario</th>
+                                    <th>Asunto</th>
+                                    <th>Mensaje</th>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
                                 </tr>
                             </thead>
                             <tbody id="listado"></tbody>

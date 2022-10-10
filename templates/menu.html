@@ -27,21 +27,14 @@
 
     <div class="offcanvas-body">
         <hr>
-        <div class="usuario">
+        <div class="Usuario">
             <img src="https://picsum.photos/id/1005/367/267" alt="">
-            <p>{{ session['nombre'] }}</p>
-            <p id="login_usuario">{{ session['username'] }}</p>
+            <p>{{ session['username'] }}</p>
+            <p id="login_usuario">{{ session['email'] }}</p>
         </div>
         <hr>
 
         <div class="d-grid gap-2">
-            <a href="#" class="boton seleccionado"><i class="bi bi-house"></i>Perfil</a>
-            <a onclick="verdatos();" href="{{url_for('mensajeria')}}" class="boton"><i class="bi bi-person"></i>Gestion Perfil</a>
-          
-        </div>
-
-        <div class="d-grid gap-2">
-            <a href="#" class="boton seleccionado"><i class="bi bi-house"></i>Mensajes</a>
             <a href="{{url_for('bandeja')}}" class="boton"><i class="bi bi-person"></i>Bandeja de Mesanjes</a>
                    
         </div>

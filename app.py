@@ -43,18 +43,19 @@ def consulta_mensajes_ind():
 @app.route('/enviarmensaje', methods=['POST'])
 def enviar_mensaje():
     datos=request.form
-    rem=session['username']
+    rem=session['email']
     dest=datos['destinatario']
     asu=datos['asunto']
     mens=datos['cuerpo']
     resultado=controlador.adicionar_mensajes(rem,dest,asu,mens)
     if resultado:
-        flash('Mensaje Enviar Exitosamente...')
+        flash('Mensaje Enviado Exitosamente...')
     else:
         flash('Error Enviando Mensaje...')
 
     listaruser=controlador.listar_usuario(rem)
-    return render_template('bandeja.html', datauser=listaruser)
+    return redirect(url_for('bandeja'))
+    #return render_template('bandeja.html', datauser=listaruser)
 
 @app.route('/activarCuenta', methods=['POST'])
 def activarCuenta():
@@ -93,7 +94,11 @@ def validarlogin():
         else:
             if check_password_hash(resultado[0]['Contraseña'],Contraseña):
                 if resultado[0]['Verificado']==1:
-                    return render_template('bandeja.html')
+                    session['username']=Usu
+                    session['email']=resultado[0]['Email']
+                    listaruser=controlador.listar_usuario(Usu)
+                    print(listaruser)
+                    return render_template('bandeja.html', datauser=listaruser)
                 else:
                     return redirect(url_for('validar'))
             else:
@@ -159,13 +164,19 @@ def actualizarcontra():
             flash('Ha ocurrido un error')
     return redirect(url_for('login'))
 
-### RUTAS DE NAVEGACIÓN ###   
+### RUTAS DE NAVEGACIÓN ###  
+@app.route('/')
+def index():
+    return render_template('login.html')
+ 
 @app.route('/bandeja')
 def bandeja():
-    return render_template('bandeja.html')
+    listaruser=controlador.listar_usuario(session['username'])
+    return render_template('bandeja.html', datauser=listaruser)
 
 @app.route('/login')
 def login():
+    session.clear()
     return render_template('login.html')
 
 @app.route('/registro')
@@ -183,6 +194,10 @@ def restablecer():
 @app.route('/validar')
 def validar():
     return render_template('validar.html')
+
+@app.route('/menu')
+def menu():
+    return render_template('menu.html')
 
 @app.route('/politicas')
 def politicas():

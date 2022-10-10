@@ -108,11 +108,9 @@ def listar_usuario(Usuario):
             registro={
                     'ID':u[0],
                     'Usuario':u[1],
-                    'Contraseña':u[2],
                     'Email':u[3]
                 }
-            usuarios.append(registro)        
-                    
+            usuarios.append(registro)                  
         return usuarios
     except:
         return False   
