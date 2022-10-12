@@ -1,4 +1,5 @@
 function verdatos(){
+    console.log("ESTOY AQUÍ-----")
     var listapost;
     var identificador=document.getElementById("login_usuario").innerHTML;
     var url="http://localhost:5000/consultarmail"
@@ -24,12 +25,11 @@ function verdatos(){
     for(var i=0;i<listapost.length;i++)
     {
         info=info+"<tr'>"
-        info=info+"<td>"+listapost[i]['id'] + "</td>"
-        info=info+"<td>"+listapost[i]['remitente'] + "</td>"
-        info=info+"<td>"+listapost[i]['destinatario'] + "</td>"
-        info=info+"<td>"+listapost[i]['fecha'] + "</td>"
-        info=info+"<td>"+listapost[i]['asunto'] + "</td>"
-        info=info+"<td>"+listapost[i]['mensaje'] + "</td>"
+        info=info+"<td>"+listapost[i]['Remitente'] + "</td>"
+        info=info+"<td>"+listapost[i]['Destinatario'] + "</td>"
+        info=info+"<td>"+listapost[i]['Fecha'] + "</td>"
+        info=info+"<td>"+listapost[i]['Asunto'] + "</td>"
+        info=info+"<td>"+listapost[i]['Mensaje'] + "</td>"
         if(listapost[i]['tipo']=='Mensaje Recibido'){
         info=info+"<td> <span class='badge rounded-pill bg-info'>"+listapost[i]['tipo']+"</span></td>"
         }else{

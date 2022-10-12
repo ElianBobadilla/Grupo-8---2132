@@ -15,7 +15,6 @@ def Correo(usuario, email_destino, codigo):
     smtp.sendmail(remitente, destinatario, email.as_string())
     smtp.quit()
     
-    
 def RecuperarContraseña(email_destino): 
     remitente = "equipo_g8@outlook.com"
     destinatario = email_destino
@@ -30,5 +29,21 @@ def RecuperarContraseña(email_destino):
     smtp.login(remitente, "centermail8")
     smtp.sendmail(remitente, destinatario, email.as_string())
     smtp.quit()
+    
+def Notificacion(Usuario, email_destino): 
+    remitente = "equipo_g8@outlook.com"
+    destinatario = email_destino
+    mensaje = Usuario + ", te ha enviado un nuevo mensaje"
+    email = EmailMessage()
+    email["From"] = remitente
+    email["To"] = destinatario
+    email["Subject"] = "¡Nuevo mensaje"
+    email.set_content(mensaje)
+    smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
+    smtp.starttls()
+    smtp.login(remitente, "centermail8")
+    smtp.sendmail(remitente, destinatario, email.as_string())
+    smtp.quit()
+
 
     

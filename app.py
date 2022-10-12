@@ -21,10 +21,8 @@ def consulta_mail():
             resultado=controlador.listar_mensajes(1,'')
         else:
             resultado=controlador.listar_mensajes(2,usu)    
-  
     else:
-       resultado=controlador.listar_mensajes(1,'')      
-
+        resultado=controlador.listar_mensajes(1,'')      
     return jsonify(resultado)
 
 @app.route('/consultamensajes')
@@ -43,16 +41,17 @@ def consulta_mensajes_ind():
 @app.route('/enviarmensaje', methods=['POST'])
 def enviar_mensaje():
     datos=request.form
+    usu=session['username']
     rem=session['email']
     dest=datos['destinatario']
     asu=datos['asunto']
     mens=datos['cuerpo']
-    resultado=controlador.adicionar_mensajes(rem,dest,asu,mens)
+    resultado=controlador.adicionar_mensajes(usu,rem,dest,asu,mens)
     if resultado:
         flash('Mensaje Enviado Exitosamente...')
     else:
         flash('Error Enviando Mensaje...')
-
+    print(resultado)
     listaruser=controlador.listar_usuario(rem)
     return redirect(url_for('bandeja'))
     #return render_template('bandeja.html', datauser=listaruser)
@@ -81,7 +80,6 @@ def validarlogin():
     Contraseña=datos['Contraseña']
     if Usu==''and Contraseña=='':
        flash('Datos Incompletos')
-       print('Datos Incompletos')
        return redirect(url_for('login'))
     elif len(Contraseña)<=6:    
        flash('La contraseña debe tener minimo 6 caracteres')
@@ -194,10 +192,6 @@ def restablecer():
 @app.route('/validar')
 def validar():
     return render_template('validar.html')
-
-@app.route('/menu')
-def menu():
-    return render_template('menu.html')
 
 @app.route('/politicas')
 def politicas():

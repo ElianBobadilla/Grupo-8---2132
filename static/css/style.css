@@ -17,4 +17,12 @@ body {
     height: 100%;
 }
 
+.mensajes{
+    
+    width: 500vh;
+    height: 10vh;
+    font-size: 14px;
+    padding: 0px 0px 0px 0px;
+    
+}
 

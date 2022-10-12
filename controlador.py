@@ -57,8 +57,6 @@ def activar_cuenta(Usuario, Cod_Verificacion):
     try:   
         db=conexion()
         cursor=db.cursor()
-        #sql='UPDATE Usuario SET Verificado=1 WHERE Usuario=? AND Cod_Verificacion=?'
-        #
         Sql = "UPDATE Usuario SET Verificado=1 WHERE Usuario=? AND Cod_Verificacion=?"
         cursor.execute(Sql,[Usuario, Cod_Verificacion])
         db.commit()
@@ -115,13 +113,16 @@ def listar_usuario(Usuario):
     except:
         return False   
 
-def adicionar_mensajes(rem,dest,asunto,cuerpo):
+def adicionar_mensajes(usu,rem,dest,asunto,cuerpo):
+    now = datetime.now()
+    fecha = now.strftime('%Y-%m-%d %H:%M:%S')
     try:
         db=conexion()
         cursor=db.cursor()
-        sql='INSERT INTO Correos(Remitente,Destinatario,Asunto,Mensaje) VALUES(?,?,?,?)'
-        cursor.execute(sql,[rem,dest,asunto,cuerpo])
+        sql='INSERT INTO Correos(Remitente,Destinatario,Asunto,Mensaje,Fecha) VALUES(?,?,?,?,?)'
+        cursor.execute(sql,[rem,dest,asunto,cuerpo,fecha])
         db.commit()
+        EnviarCorreo.Notificacion(usu,dest)
         return True
     except:
         return False
@@ -137,22 +138,20 @@ def listar_mensajes(tipo,Usuario):
             sql='SELECT * FROM Correos WHERE Remitente=? OR Destinatario=? ORDER BY Fecha DESC'
             cursor.execute(sql,[Usuario,Usuario])
         resultado=cursor.fetchall()
-        usuarios=[]
+        mensajes=[]
         for u in resultado:
             mensaje='Mensaje Recibido'
-            if u[1]==Usuario:
+            if u[0]==Usuario:
                 mensaje='Mensaje Enviado'
             registro={
-                    'Id':u[0],
-                    'Remitente':u[1],
-                    'Destinatario':u[2],
-                    'Asunto':u[3],
-                    'Mensaje':u[4],
-                    'Fecha':u[5],
+                    'Remitente':u[0],
+                    'Destinatario':u[1],
+                    'Asunto':u[2],
+                    'Mensaje':u[3],
+                    'Fecha':u[4],
                     'tipo':mensaje
                 }
-            usuarios.append(registro)        
-                    
-        return usuarios
+            mensajes.append(registro)                 
+        return mensajes
     except:
         return False
