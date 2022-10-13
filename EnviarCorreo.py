@@ -37,7 +37,7 @@ def Notificacion(Usuario, email_destino):
     email = EmailMessage()
     email["From"] = remitente
     email["To"] = destinatario
-    email["Subject"] = "¡Nuevo mensaje"
+    email["Subject"] = "¡Nuevo mensaje!"
     email.set_content(mensaje)
     smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
     smtp.starttls()

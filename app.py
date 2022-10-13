@@ -25,19 +25,6 @@ def consulta_mail():
         resultado=controlador.listar_mensajes(1,'')      
     return jsonify(resultado)
 
-@app.route('/consultamensajes')
-def consulta_mensajes():
-    usu='equipo_g8@outlook.com'
-    resultado=controlador.listar_mensajes(usu)
-    return jsonify(resultado)
-
-@app.route('/consultamensajesind',methods=['POST'])
-def consulta_mensajes_ind():
-    datos=request.get_json()
-    usu=datos['username']
-    resultado=controlador.listar_mensajes(usu)
-    return jsonify(resultado)
-
 @app.route('/enviarmensaje', methods=['POST'])
 def enviar_mensaje():
     datos=request.form
@@ -51,8 +38,7 @@ def enviar_mensaje():
         flash('Mensaje Enviado Exitosamente...')
     else:
         flash('Error Enviando Mensaje...')
-    print(resultado)
-    listaruser=controlador.listar_usuario(rem)
+    #listaruser=controlador.listar_usuario(rem)
     return redirect(url_for('bandeja'))
     #return render_template('bandeja.html', datauser=listaruser)
 
@@ -63,15 +49,15 @@ def activarCuenta():
     Cod_Verificacion=datos['Codigo']
     if Usuario=='' and Cod_Verificacion=='':
         flash('Datos Incompletos')
-        return redirect('/validar')
+        return redirect('validar')
     else:
         resultado=controlador.activar_cuenta(Usuario, Cod_Verificacion)
         if resultado==True:
             flash('Cuenta Activada Safisfactoriamente')
-            return redirect('/login')   
+            return redirect('validar')   
         else:
             flash('Error en la activación de la activación')
-            return redirect('/validar')
+            return redirect('validar')
                                 
 @app.route('/verificar', methods=['POST'])
 def validarlogin():
@@ -79,29 +65,26 @@ def validarlogin():
     Usu=datos['Usuario']
     Contraseña=datos['Contraseña']
     if Usu==''and Contraseña=='':
-       flash('Datos Incompletos')
-       return redirect(url_for('login'))
+        flash('Datos Incompletos')
+        print('Datos Incompletos')
     elif len(Contraseña)<=6:    
-       flash('La contraseña debe tener minimo 6 caracteres')
-       return redirect(url_for('login'))
+        flash('La contraseña debe tener minimo 6 caracteres')
     else:
         resultado=controlador.validacion_login(Usu)
         if resultado==False:
             flash('Usuario/Contraseña Incorrectos')
-            return redirect(url_for('login'))
         else:
             if check_password_hash(resultado[0]['Contraseña'],Contraseña):
                 if resultado[0]['Verificado']==1:
                     session['username']=Usu
                     session['email']=resultado[0]['Email']
                     listaruser=controlador.listar_usuario(Usu)
-                    print(listaruser)
                     return render_template('bandeja.html', datauser=listaruser)
                 else:
                     return redirect(url_for('validar'))
             else:
                 flash('Contraseña Incorrecta')
-                return redirect(url_for('login'))
+    return redirect(url_for('login'))
             
 @app.route('/addregistro', methods=['POST'])
 def add_registro():
@@ -112,15 +95,14 @@ def add_registro():
     ContraseñaEnc=generate_password_hash(Contraseña)
     if Usuario==''and Contraseña=='' and Email=='':
         flash('Datos Incompletos')
-    elif len(Contraseña)<=6:    
+    elif len(Contraseña)<6:    
         flash('La contraseña debe tener minimo 6 caracteres')
     else:
         resultado=controlador.adicionar_registros(Usuario,ContraseñaEnc,Email)
         if resultado:
             flash('Registro Almacenado Correctamente')
-            return redirect(url_for('login'))
         else:
-            flash('Ha ocurrido un error')
+            flash('Ya se encuentra registrado usuario y/o correo')
     return redirect(url_for('registro'))   
     
 @app.route('/recuperarcontra', methods=['POST'])
@@ -151,21 +133,18 @@ def actualizarcontra():
         flash('La contraseña debe tener minimo 6 caracteres')
     elif Contraseña1 != Contraseña2:
         flash('Las contraseñas no son iguales')
-        redirect(url_for('/nueva-contra'))
+        return redirect(url_for('nueva-contra'))
     else:
         ContraseñaEnc=generate_password_hash(Contraseña1)
         resultado=controlador.actualizar_contra(Usuario,ContraseñaEnc)
         if resultado:
             flash('Actualización realizada correctamente')
-            return redirect(url_for('login'))
+            #return redirect(url_for('login'))
         else:
             flash('Ha ocurrido un error')
-    return redirect(url_for('login'))
+    #return redirect(url_for('login'))
 
 ### RUTAS DE NAVEGACIÓN ###  
-@app.route('/')
-def index():
-    return render_template('login.html')
  
 @app.route('/bandeja')
 def bandeja():

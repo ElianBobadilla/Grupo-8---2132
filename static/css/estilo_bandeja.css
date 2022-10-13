@@ -1,0 +1,28 @@
+.bandeja-container{
+    width: 80%;
+    position: relative;
+    border-radius: 10px 10px 10px 10px;
+    color: blanchedalmond;
+    padding: 0px 0px 0px 0px;
+}
+
+.mensajes-container{
+    border-radius: 10px 10px 10px 10px;
+    color: blanchedalmond;
+    padding: 0px 0px 0px 0px;
+}
+
+
+.mensajes{
+    font-size: 14px;
+    padding: 0px 0px 0px 0px; 
+}
+
+.mensaje-enviar{
+    height: 100px ;
+}
+
+.navbar {
+    background-color: aqua;
+    border-radius: 10px 10px 10px 10px;
+}
