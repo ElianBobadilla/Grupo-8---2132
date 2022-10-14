@@ -129,8 +129,10 @@ def actualizarcontra():
     Contraseña2=datos['Contraseña2']
     if Usuario=="" or Contraseña1=="" or Contraseña2=="":
         flash('Datos Incompletos')
+        return redirect(url_for('nueva-contra'))
     elif len(Contraseña1)<=6:    
         flash('La contraseña debe tener minimo 6 caracteres')
+        return redirect(url_for('nueva-contra'))
     elif Contraseña1 != Contraseña2:
         flash('Las contraseñas no son iguales')
         return redirect(url_for('nueva-contra'))
@@ -139,10 +141,11 @@ def actualizarcontra():
         resultado=controlador.actualizar_contra(Usuario,ContraseñaEnc)
         if resultado:
             flash('Actualización realizada correctamente')
-            #return redirect(url_for('login'))
+            return redirect(url_for('login'))
         else:
             flash('Ha ocurrido un error')
-    #return redirect(url_for('login'))
+            return redirect(url_for('nueva-contra'))
+    
 
 ### RUTAS DE NAVEGACIÓN ###  
  

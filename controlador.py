@@ -26,7 +26,7 @@ def adicionar_registros(Usuario, Contraseña, Email):
         sql = 'INSERT INTO Usuario (Usuario, Contraseña, Email, Verificado, Cod_Verificacion) VALUES (?,?,?,?,?)'
         cursor.execute(sql,[Usuario, Contraseña, Email, 0, Cod_verificacion])
         db.commit()
-        #EnviarCorreo.Correo(Usuario, Email, Cod_verificacion)
+        EnviarCorreo.Correo(Usuario, Email, Cod_verificacion)
         return True
     except:
         return False
@@ -74,7 +74,7 @@ def validarcorreo(Email):
         Sql = 'SELECT * FROM Usuario WHERE Email=?'
         cursor.execute(Sql,[Email])
         resultado = cursor.fetchone()
-        #EnviarCorreo.RecuperarContraseña(Email)
+        EnviarCorreo.RecuperarContraseña(Email)
         print(resultado)
         if resultado != None:
             return 'SI'
@@ -122,7 +122,7 @@ def adicionar_mensajes(usu,rem,dest,asunto,cuerpo):
         sql='INSERT INTO Correos(Remitente,Destinatario,Asunto,Mensaje,Fecha) VALUES(?,?,?,?,?)'
         cursor.execute(sql,[rem,dest,asunto,cuerpo,fecha])
         db.commit()
-        #EnviarCorreo.Notificacion(usu,dest)
+        EnviarCorreo.Notificacion(usu,dest)
         return True
     except:
         return False
